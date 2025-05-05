@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dhakal Portfolio
 
-## Getting Started
+> A sleek, modern developer portfolio showcasing projects, skills, and personal brand. Built with performance, design, and clarity in mind.
 
-First, run the development server:
+## Live Demo
+
+[https://dhakal.tech](https://dhakal.tech)
+
+---
+
+## Features
+
+- **Fast & SEO Optimized** – Built with Next.js for server-side rendering and lightning-fast performance.
+- **Custom Design** – Styled with Tailwind CSS and inspired by clean, minimalist layouts.
+- **Responsive** – Fully responsive for mobile, tablet, and desktop.
+- **Dynamic Content** – Projects, skills, and resume are easily updatable.
+- **Dark Mode Support**
+- **TypeScript Support**
+
+---
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Language:** TypeScript
+- **Deployment:** Vercel / GitHub Pages / Custom Domain (e.g., dhakal.tech)
+
+---
+
+## Installation
 
 ```bash
+git clone https://github.com/dhakalsaurav11/dhakal-portfolio.git
+cd dhakal-portfolio
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+- Update your project details, social links, and skills in the relevant config/data files (e.g., `data/projects.ts`, `data/skills.ts`)
+- Customize your branding (colors, fonts) in `tailwind.config.js` and `globals.css`
+- Update meta tags and favicon in `pages/_document.tsx` and `public/`
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## File Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+├── components/       # UI components
+├── data/             # Configurable data (projects, skills, etc.)
+├── pages/            # Next.js routes
+├── public/           # Static assets
+├── styles/           # Global CSS and Tailwind setup
+├── tsconfig.json     # TypeScript config
+└── README.md
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Easily deploy via:
+
+- **[Vercel](https://vercel.com/)** (recommended)
+- GitHub Pages
+- Custom server
+
+For Vercel:
+
+```bash
+npx vercel
+```
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## Author
+
+**Saurav Dhakal**  
+[GitHub](https://github.com/dhakalsaurav11) · [LinkedIn](https://linkedin.com/in/dhakalsaurav11)
+
+---
+
+## Acknowledgements
+
+- Inspired by modern portfolios like [leerob.io](https://leerob.io/)
+- Built with love using Next.js and Tailwind
+
