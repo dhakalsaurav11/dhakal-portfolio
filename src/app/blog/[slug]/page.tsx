@@ -15,7 +15,7 @@ export async function generateStaticParams() {
   }));
 }
 
-function useCompiledMDX(code: string) {
+function compileMDX(code: string) {
   return new Function("require", "exports", "module", "React", "runtime", `${code}`)(
     require, {}, {}, runtime, runtime
   );
@@ -24,7 +24,7 @@ function useCompiledMDX(code: string) {
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   try {
     const { code, data } = await getPostBySlug(params.slug);
-    const MDXContent = useCompiledMDX(code);
+    const MDXContent = compileMDX(code);
 
     return (
       <div className="py-12 max-w-3xl mx-auto space-y-6">
