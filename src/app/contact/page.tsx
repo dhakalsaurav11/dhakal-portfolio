@@ -27,7 +27,7 @@ export default function ContactPage() {
     >
       <h1 className="text-3xl font-bold">Get in Touch</h1>
       <p className="text-neutral-400">
-        Whether you're hiring, collaborating, or just curious — feel free to reach out!
+        Whether you&apos;re hiring, collaborating, or just curious — feel free to reach out!
       </p>
 
       <div className="bg-neutral-800 rounded-md p-6 space-y-4 border border-neutral-700">
