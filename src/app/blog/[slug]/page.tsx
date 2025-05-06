@@ -25,11 +25,11 @@ function compileMDX(code: string) {
   );
 }
 
-export default async function BlogPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPost(
+  args: { params: { slug: string } }
+) {
+  const { params } = args;
+
   try {
     const { code, data } = await getPostBySlug(params.slug);
     const MDXContent = compileMDX(code);
