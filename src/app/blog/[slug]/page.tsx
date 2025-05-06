@@ -17,11 +17,19 @@ export async function generateStaticParams() {
 
 function compileMDX(code: string) {
   return new Function("require", "exports", "module", "React", "runtime", `${code}`)(
-    require, {}, {}, runtime, runtime
+    require,
+    {},
+    {},
+    runtime,
+    runtime
   );
 }
 
-export default async function BlogPost({ params }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
   try {
     const { code, data } = await getPostBySlug(params.slug);
     const MDXContent = compileMDX(code);
