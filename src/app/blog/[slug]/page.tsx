@@ -35,7 +35,8 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         </article>
       </div>
     );
-  } catch (err) {
+  } catch {
     notFound();
   }
+  
 }

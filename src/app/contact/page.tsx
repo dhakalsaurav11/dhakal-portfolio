@@ -44,7 +44,7 @@ export default function ContactPage() {
       </div>
 
       <form
-        action="https://formspree.io/f/yourformid" // ← Replace with your real ID
+        action="https://formspree.io/f/myid" // ← NEED TO ADD ID
         method="POST"
         onSubmit={(e) => {
             const honeypot = (e.currentTarget.elements.namedItem("company") as HTMLInputElement)?.value;
