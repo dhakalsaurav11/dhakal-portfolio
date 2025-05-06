@@ -16,22 +16,25 @@ export async function generateStaticParams() {
 }
 
 function compileMDX(code: string) {
-  return new Function("require", "exports", "module", "React", "runtime", `${code}`)(
-    require,
-    {},
-    {},
-    runtime,
-    runtime
-  );
+  return new Function(
+    "require",
+    "exports",
+    "module",
+    "React",
+    "runtime",
+    `${code}`
+  )(require, {}, {}, runtime, runtime);
 }
 
-export default async function BlogPost(
-  args: { params: { slug: string } }
-) {
-  const { params } = args;
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
   try {
-    const { code, data } = await getPostBySlug(params.slug);
+    const { code, data } = await getPostBySlug(slug);
     const MDXContent = compileMDX(code);
 
     return (
