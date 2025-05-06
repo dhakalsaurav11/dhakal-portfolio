@@ -6,6 +6,10 @@ import * as runtime from "react/jsx-runtime";
 import fs from "fs";
 import path from "path";
 
+interface BlogPageProps {
+  params: { slug: string };
+}
+
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), "content", "blog");
   const files = fs.readdirSync(blogDir);
@@ -21,7 +25,7 @@ function compileMDX(code: string) {
   );
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: BlogPageProps) {
   try {
     const { code, data } = await getPostBySlug(params.slug);
     const MDXContent = compileMDX(code);
