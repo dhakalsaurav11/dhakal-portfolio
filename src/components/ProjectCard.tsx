@@ -7,13 +7,23 @@ interface ProjectCardProps {
   tech: string[];
   role: string;
   github?: string;
+  website?: string;
   demo?: string;
   image?: string;
 }
 
-export function ProjectCard({ title, description, tech, role, github, demo, image }: ProjectCardProps) {
+export function ProjectCard({
+  title,
+  description,
+  tech,
+  role,
+  github,
+  website,
+  demo,
+  image,
+}: ProjectCardProps) {
   return (
-  <Card className="bg-neutral-800 text-white border border-neutral-700 transition-transform hover:scale-[1.02] hover:shadow-xl">
+    <Card className="bg-neutral-800 text-white border border-neutral-700 transition-transform hover:scale-[1.02] hover:shadow-xl">
       <CardContent className="p-6 space-y-4">
         {image && (
           <div className="w-full h-48 relative rounded-md overflow-hidden border border-neutral-700">
@@ -26,17 +36,19 @@ export function ProjectCard({ title, description, tech, role, github, demo, imag
           <span className="font-medium text-white">Tech:</span> {tech.join(", ")}<br />
           <span className="font-medium text-white">Role:</span> {role}
         </div>
+
         <div className="flex gap-3 pt-2">
-          {github && (
+          {(website || github) && (
             <a
-              href={github}
+              href={website || github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm px-3 py-1 border border-neutral-600 rounded hover:bg-neutral-700"
             >
-              GitHub
+              {website ? "Website" : "GitHub"}
             </a>
           )}
+
           {demo && (
             <a
               href={demo}
