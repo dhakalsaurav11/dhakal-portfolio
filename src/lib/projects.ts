@@ -9,6 +9,17 @@ export const allProjects = [
       image: "/screenshots/softskills.png",
     },
     {
+      title: "Publication Download Tracker",
+      description: "Lightweight PHP-based tracker that logs downloads of academic publications with IP address and timestamps, integrated into a research portal.",
+      tech: ["PHP", "CodeIgniter", "MySQL", "HTML", "Bootstrap"],
+      role: "Backend logic, model integration, download logging, and dashboard UI embedding",
+      github: "https://github.com/dhakalsaurav11/tracker",
+      website: "https://mentor.unm.edu/tracker/analytics",
+      demo: "",
+      image: "/screenshots/tracker.png",
+    },
+    
+    {
       title: "CS351 Fire Propagation Simulator",
       description: "Simulates wildfire spread using sensors and mobile agents with C++ and GTK GUI.",
       tech: ["Java", "Graph Theory", "File I/O"],
