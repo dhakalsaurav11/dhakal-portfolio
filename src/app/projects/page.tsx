@@ -53,6 +53,7 @@ export default function ProjectsPage() {
             tech={project.tech}
             role={project.role}
             github={project.github}
+            website={project.website}
             demo={project.demo}
             image={project.image}
           />
