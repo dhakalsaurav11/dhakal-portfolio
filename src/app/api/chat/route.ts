@@ -1,12 +1,17 @@
 import { NextResponse } from 'next/server';
 import { allProjects } from '@/lib/projects';
 
+type ChatMessage = {
+  role: 'user' | 'assistant';
+  content: string;
+};
+
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages }: { messages: ChatMessage[] } = await req.json();
 
   const userMessages = messages
-    .filter((m: any) => m.role === 'user')
-    .map((m: any) => m.content)
+    .filter((m: ChatMessage) => m.role === 'user')
+    .map((m: ChatMessage) => m.content)
     .join('\n');
 
   const projectList = allProjects.map((p) => {
@@ -15,7 +20,7 @@ export async function POST(req: Request) {
   }).join('\n');
 
   const prompt = `<s>[INST]
-You are a helpful assistant on the portfolio of Saurav Dhakal — a full-stack developer studying CS at University of New Mexico.
+You are a helpful assistant on the portfolio of Saurav Dhakal — a full-stack developer and computer science student.
 
 Here are Saurav's projects:
 ${projectList}
@@ -46,10 +51,10 @@ Question: ${userMessages}
 
     return NextResponse.json({ content: outputText });
 
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("❌ Together.ai error:", err);
     return NextResponse.json({
-      content: `Internal error: ${err.message ?? 'Something went wrong.'}`,
+      content: `Internal error: ${err instanceof Error ? err.message : 'Something went wrong.'}`,
     });
   }
 }
