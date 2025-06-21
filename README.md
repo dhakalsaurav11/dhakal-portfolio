@@ -1,34 +1,35 @@
 # Dhakal Portfolio
 
-> A sleek, modern developer portfolio showcasing projects, skills, and personal brand. Built with performance, design, and clarity in mind.
+> A sleek, modern developer portfolio showcasing projects, skills, and personal brand — built for clarity, speed, and customization.
 
-## Live Demo
+## 🔗 Live Demo
 
-[https://dhakal.tech](https://dhakal.tech)
-
----
-
-## Features
-
-- **Fast & SEO Optimized** – Built with Next.js for server-side rendering and lightning-fast performance.
-- **Custom Design** – Styled with Tailwind CSS and inspired by clean, minimalist layouts.
-- **Responsive** – Fully responsive for mobile, tablet, and desktop.
-- **Dynamic Content** – Projects, skills, and resume are easily updatable.
-- **Dark Mode Support**
-- **TypeScript Support**
+[https://the-dhakal.com](https://the-dhakal.com)
 
 ---
 
-## Tech Stack
+## ✨ Features
 
-- **Framework:** [Next.js](https://nextjs.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Language:** TypeScript
-- **Deployment:** Vercel / GitHub Pages / Custom Domain (e.g., dhakal.tech)
+* **Fast & SEO Optimized** – Next.js + TypeScript for performance and scalability
+* **Custom AI Assistant** – Chat with a dynamic assistant powered by Together.ai
+* **Fully Responsive** – Works great on desktop, tablet, and mobile
+* **Dynamic Project Loading** – Project data loads from `data/projects.ts`
+* **Dark Mode Support**
+* **Minimal, Custom Design** – Tailwind CSS styling inspired by clean dev portfolios
 
 ---
 
-## Installation
+## ⚙️ Tech Stack
+
+* **Framework:** [Next.js](https://nextjs.org/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **Language:** TypeScript
+* **AI Assistant:** [Together.ai](https://together.ai/)
+* **Deployment:** Vercel + Custom Domain (e.g., `the-dhakal.com`)
+
+---
+
+## 🚀 Installation
 
 ```bash
 git clone https://github.com/dhakalsaurav11/dhakal-portfolio.git
@@ -37,63 +38,47 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000`
+Visit `http://localhost:3000` in your browser.
 
 ---
 
-## Usage
+## 🔧 Usage
 
-- Update your project details, social links, and skills in the relevant config/data files (e.g., `data/projects.ts`, `data/skills.ts`)
-- Customize your branding (colors, fonts) in `tailwind.config.js` and `globals.css`
-- Update meta tags and favicon in `pages/_document.tsx` and `public/`
+* **Projects:** Edit `data/projects.ts` to add/update featured work
+* **Skills & Info:** Add/edit skills in `data/skills.ts` and bio details in layout files
+* **Branding:** Modify `tailwind.config.js` and `globals.css` for custom colors/fonts
+* **Chat Assistant:** Configured in `PortfolioChat.tsx` and `/api/chat/route.ts`
+
+  * Uses Together.ai
+  * Reads your projects automatically
+  * Provides contextual Q\&A to site visitors
 
 ---
 
-## File Structure
+## 📁 File Structure
 
 ```bash
-├── components/       # UI components
-├── data/             # Configurable data (projects, skills, etc.)
-├── pages/            # Next.js routes
+├── components/       # UI components (navbar, chat, cards)
+├── data/             # Dynamic content (projects, skills)
+├── app/              # App directory (routes, layouts)
 ├── public/           # Static assets
-├── styles/           # Global CSS and Tailwind setup
-├── tsconfig.json     # TypeScript config
+├── styles/           # Tailwind + global CSS
+├── .env.local        # API key config (Together.ai)
 └── README.md
 ```
 
 ---
 
-## Deployment
+## 🧠 About
 
-Easily deploy via:
+**Saurav Dhakal**
+CS Student · Full-Stack Developer
 
-- **[Vercel](https://vercel.com/)** (recommended)
-- GitHub Pages
-- Custom server
-
-For Vercel:
-
-```bash
-npx vercel
-```
-
----
-
-## License
-
-This project is licensed under the **MIT License**.
-
----
-
-## Author
-
-**Saurav Dhakal**  
 [GitHub](https://github.com/dhakalsaurav11) · [LinkedIn](https://linkedin.com/in/dhakalsaurav11)
 
 ---
 
-## Acknowledgements
+## 🪴 Acknowledgements
 
-- Inspired by modern portfolios like [leerob.io](https://leerob.io/)
-- Built with love using Next.js and Tailwind
-
+* Inspired by modern portfolios like [leerob.io](https://leerob.io/)
+* Built with ❤️ using Next.js, Tailwind, and free AI APIs

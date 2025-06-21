@@ -22,7 +22,7 @@ export const allProjects = [
     {
       title: "CS351 Fire Propagation Simulator",
       description: "Simulates wildfire spread using sensors and mobile agents with C++ and GTK GUI.",
-      tech: ["Java", "Graph Theory", "File I/O"],
+      tech: ["Java", "Graph Theory", "File I/O", "School Project"],
       role: "Network logic, SensorNode, propagation, agent debugging",
       github: "https://github.com/UNM-CS351/multi-chef-lab-dhakalsaurav11",
       demo: "",
@@ -58,7 +58,7 @@ export const allProjects = [
     {
       title: "Scrabble Game",
       description: "Playable GUI version of Scrabble with tile rules, board logic, and scoring system.",
-      tech: ["Java", "Swing"],
+      tech: ["Java", "Swing", "School Project"],
       role: "Board logic, GUI rendering, JAR packaging",
       github: "https://github.com/UNM-CS351/project-3-scrabble-dhakalsaurav11",
       demo: "",
@@ -67,7 +67,7 @@ export const allProjects = [
     {
       title: "Auctions Game",
       description: "A distributed auction system simulating real-time interactions between agents, auction houses, and a central bank using Java sockets and JavaFX.",
-      tech: ["Java"],
+      tech: ["Java", "School Project"],
       role: "Board logic, GUI rendering, JAR packaging",
       github: "https://github.com/UNM-CS351/project-5-auctions-project-5-group-02-1",
       demo: "",

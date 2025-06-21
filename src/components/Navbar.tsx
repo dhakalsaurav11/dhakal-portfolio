@@ -29,7 +29,7 @@ export function Navbar() {
     >
       <nav className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="text-xl font-bold text-white hover:text-blue-400">
-          dhakal.tech
+          dhakal
         </Link>
         <div className="flex items-center space-x-4 text-sm">
           {links.map(({ href, label }) => (

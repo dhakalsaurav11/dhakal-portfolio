@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { PortfolioChat } from "@/components/PortfolioChat";
 
 const inter = Inter({ subsets: ["latin"] });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -19,6 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <Navbar />
           <main className="max-w-5xl mx-auto px-6 py-12">{children}</main>
+
+          <PortfolioChat /> 
         </ThemeProvider>
       </body>
     </html>
