@@ -8,7 +8,13 @@ type ChatMessage = {
 };
 
 export function PortfolioChat() {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      role: 'assistant',
+      content:
+        "Hi there! I'm Diana, Saurav's AI assistant. If you have any questions about his work, feel free to ask!",
+    },
+  ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -21,7 +27,7 @@ export function PortfolioChat() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const newMessages: ChatMessage[] = [...messages, { role: 'user' as const, content: input }];
+    const newMessages: ChatMessage[] = [...messages, { role: 'user', content: input }];
     setMessages(newMessages);
     setInput('');
     setLoading(true);
@@ -35,13 +41,11 @@ export function PortfolioChat() {
 
       const data = await res.json();
 
-      setMessages([...newMessages, { role: 'assistant' as const, content: data.content }]);
+      setMessages([...newMessages, { role: 'assistant', content: data.content }]);
     } catch {
-      // optional: log if needed during dev
-      // console.error(err);
       setMessages([
         ...newMessages,
-        { role: 'assistant' as const, content: '❌ Error getting response from assistant.' },
+        { role: 'assistant', content: '❌ Error getting response from assistant.' },
       ]);
     } finally {
       setLoading(false);
@@ -50,7 +54,7 @@ export function PortfolioChat() {
 
   return (
     <div className="fixed bottom-6 right-6 bg-neutral-900 text-white rounded-xl w-80 shadow-lg z-50 border border-neutral-800 flex flex-col overflow-hidden">
-      <div className="p-4 border-b border-neutral-800 font-semibold">Ask Me Anything</div>
+      <div className="p-4 border-b border-neutral-800 font-semibold">Ask Diana</div>
 
       <div ref={ref} className="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm max-h-60">
         {messages.map((m, i) => (
@@ -60,7 +64,7 @@ export function PortfolioChat() {
               m.role === 'user' ? 'text-right text-blue-300' : 'text-left text-neutral-300'
             }`}
           >
-            <strong>{m.role === 'user' ? 'You' : 'AI'}:</strong>
+            <strong>{m.role === 'user' ? 'You' : 'Diana'}:</strong>
             <p className="text-sm leading-relaxed whitespace-pre-wrap">{m.content}</p>
           </div>
         ))}
