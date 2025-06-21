@@ -36,7 +36,9 @@ export function PortfolioChat() {
       const data = await res.json();
 
       setMessages([...newMessages, { role: 'assistant' as const, content: data.content }]);
-    } catch (err) {
+    } catch {
+      // optional: log if needed during dev
+      // console.error(err);
       setMessages([
         ...newMessages,
         { role: 'assistant' as const, content: '❌ Error getting response from assistant.' },
@@ -48,7 +50,7 @@ export function PortfolioChat() {
 
   return (
     <div className="fixed bottom-6 right-6 bg-neutral-900 text-white rounded-xl w-80 shadow-lg z-50 border border-neutral-800 flex flex-col overflow-hidden">
-      <div className="p-4 border-b border-neutral-800 font-semibold">Questions? Ask me!</div>
+      <div className="p-4 border-b border-neutral-800 font-semibold">Ask Me Anything</div>
 
       <div ref={ref} className="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm max-h-60">
         {messages.map((m, i) => (
