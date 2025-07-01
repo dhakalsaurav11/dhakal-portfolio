@@ -2,13 +2,13 @@
 
 > A sleek, modern developer portfolio showcasing projects, skills, and personal brand — built for clarity, speed, and customization.
 
-## 🔗 Live Demo
+## Live Demo
 
 [https://the-dhakal.com](https://the-dhakal.com)
 
 ---
 
-## ✨ Features
+## Features
 
 * **Fast & SEO Optimized** – Next.js + TypeScript for performance and scalability
 * **Custom AI Assistant** – Chat with a dynamic assistant powered by Together.ai
@@ -19,7 +19,7 @@
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 * **Framework:** [Next.js](https://nextjs.org/)
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/)
@@ -29,7 +29,7 @@
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ```bash
 git clone https://github.com/dhakalsaurav11/dhakal-portfolio.git
@@ -42,7 +42,7 @@ Visit `http://localhost:3000` in your browser.
 
 ---
 
-## 🔧 Usage
+## Usage
 
 * **Projects:** Edit `data/projects.ts` to add/update featured work
 * **Skills & Info:** Add/edit skills in `data/skills.ts` and bio details in layout files
@@ -55,7 +55,7 @@ Visit `http://localhost:3000` in your browser.
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```bash
 ├── components/       # UI components (navbar, chat, cards)
@@ -69,7 +69,7 @@ Visit `http://localhost:3000` in your browser.
 
 ---
 
-## 🧠 About
+## About
 
 **Saurav Dhakal**
 CS Student · Full-Stack Developer
