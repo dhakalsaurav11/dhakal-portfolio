@@ -78,7 +78,7 @@ CS Student · Full-Stack Developer
 
 ---
 
-## 🪴 Acknowledgements
+## Acknowledgements
 
 * Inspired by modern portfolios like [leerob.io](https://leerob.io/)
-* Built with ❤️ using Next.js, Tailwind, and free AI APIs
+* Built using Next.js, Tailwind, and free AI APIs
