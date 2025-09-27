@@ -18,8 +18,8 @@ export default function ResumePage() {
           onClick={() => {
             // Trigger download via invisible <a>
             const link = document.createElement("a");
-            link.href = "/Saurav Resume 2025.pdf";
-            link.download = "Saurav Resume 2025.pdf";
+            link.href = "/Saurav Resume 2025 (Dev).pdf";
+            link.download = "Saurav Resume 2025 (Dev).pdf";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
