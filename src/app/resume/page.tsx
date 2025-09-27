@@ -16,7 +16,6 @@ export default function ResumePage() {
       <div className="flex gap-4">
         <button
           onClick={() => {
-            // Trigger download via invisible <a>
             const link = document.createElement("a");
             link.href = "/Saurav Resume 2025 (Dev).pdf";
             link.download = "Saurav Resume 2025 (Dev).pdf";
@@ -50,7 +49,7 @@ export default function ResumePage() {
 
       {view === "download" ? (
         <a
-          href="/Saurav Resume 2025.pdf"
+          href="/Saurav Resume 2025 (Dev).pdf"
           download
           className="inline-block mt-4 text-blue-400 hover:underline"
         >
@@ -59,7 +58,7 @@ export default function ResumePage() {
       ) : (
         <div className="mt-6 border border-neutral-700 rounded-md overflow-hidden">
           <iframe
-            src="/Saurav Resume 2025.pdf"
+            src="/Saurav Resume 2025 (Dev).pdf"
             className="w-full h-[800px]"
             title="Saurav Dhakal Resume"
           />
