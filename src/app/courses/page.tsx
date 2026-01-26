@@ -59,10 +59,27 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {filteredCourses.map((course) => (
-          <CourseCard key={course.code} {...course} />
-        ))}
+      <div>
+        <div className="mt-8 grid grid-cols-10 text-sm text-neutral-400 font-medium border-b border-neutral-700 pb-2">
+          <div className="col-span-2">Code</div>
+          <div className="col-span-4">Title</div>
+          <div className="col-span-4">Topics</div>
+        </div>
+        <div className="divide-y divide-neutral-800">
+          {filteredCourses.map((course) => (
+            <div key={course.code} className="grid grid-cols-10 gap-4 text-sm text-neutral-300 py-4">
+              <div className="col-span-2 font-semibold text-white">{course.code}</div>
+              <div className="col-span-4">{course.title}</div>
+              <div className="col-span-4 flex flex-wrap gap-2">
+                {course.topics.map((topic, i) => (
+                  <span key={i} className="bg-neutral-800 text-neutral-300 text-xs px-2 py-0.5 rounded">
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

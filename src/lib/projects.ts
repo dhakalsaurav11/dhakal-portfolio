@@ -1,4 +1,20 @@
 export const allProjects = [
+  {
+    title: "Y Combinator Kanban System Simulation",
+    description: "Built a Kanban-style task system for a logistics startup in a job simulation with Y Combinator on Forage.",
+    tech: ["Node.js", "React", "SQL", "Product Thinking", "Simulation"],
+    role: "Full-stack dev + analytics: drag-and-drop UI, backend persistence, product feature recommendations",
+    website: "https://www.theforage.com/virtual-internships/prototype/BotenCEjm3LFxtq9A/Y-Combinator-Software-Engineering",
+    demo: ""
+  },
+  {
+    title: "Vista Equity Partners AI Workflow Simulation",
+    description: "Designed GenAI prompt workflows to automate customer feedback summaries and news insights for Vista’s Portfolio Operations team.",
+    tech: ["Prompt Engineering", "ChatGPT", "GenAI", "Simulation"],
+    role: "Prompt design, feedback iteration, workflow automation, quality control",
+    website: "https://www.theforage.com/completion-certificates/BotenCEjm3LFxtq9A/EregFenDKXDDeTGR2_BotenCEjm3LFxtq9A_696d6afb8d5b9c666d473801_1768788410360_completion_certificate.pdf",
+    demo: ""
+  },
     {
       title: "SoftSkills LMS System",
       description: "Dynamic course and quiz platform built with PHP, MySQL, and Bootstrap.",
@@ -6,7 +22,6 @@ export const allProjects = [
       role: "Full-stack development, admin UI, quiz logic, certificate gen",
       website: "https://mentor.unm.edu/softskills",
       demo: "",
-      image: "/screenshots/softskills.png",
     },
     {
       title: "Publication Download Tracker",
@@ -16,7 +31,6 @@ export const allProjects = [
       github: "https://github.com/dhakalsaurav11/tracker",
       website: "https://mentor.unm.edu/tracker/analytics",
       demo: "",
-      image: "/screenshots/tracker.png",
     },
     
     {
@@ -26,7 +40,6 @@ export const allProjects = [
       role: "Network logic, SensorNode, propagation, agent debugging",
       github: "https://github.com/UNM-CS351/multi-chef-lab-dhakalsaurav11",
       demo: "",
-      image: "/screenshots/fire-sim.png",
     },
     {
       title: "Shopify 'Bushido' Theme",
@@ -35,7 +48,6 @@ export const allProjects = [
       role: "Theme creation, styling, login page UX redesign",
       github: "https://github.com/dhakalsaurav11/bushido-theme",
       demo: "",
-      image: "/screenshots/shopify-theme.png",
     },
     {
       title: "Stock Tracker & Trade Engine",
@@ -44,7 +56,6 @@ export const allProjects = [
       role: "Backend API, trade logic, watchlist UI",
       github: "https://github.com/dhakalsaurav11/stx-terminal",
       demo: "",
-      image: "/screenshots/stock-tracker.png",
     },
     {
       title: "AERA Abstract Scraper",
@@ -53,7 +64,6 @@ export const allProjects = [
       role: "Multi-page scraper, CSV writer, page handler",
       github: "https://github.com/dhakalsaurav11/aera-emails-scraper",
       demo: "",
-      image: "/screenshots/aera-scraper.png",
     },
     {
       title: "Scrabble Game",
@@ -62,7 +72,6 @@ export const allProjects = [
       role: "Board logic, GUI rendering, JAR packaging",
       github: "https://github.com/UNM-CS351/project-3-scrabble-dhakalsaurav11",
       demo: "",
-      image: "/screenshots/scrabble.png",
     },
     {
       title: "Auctions Game",
@@ -71,6 +80,5 @@ export const allProjects = [
       role: "Board logic, GUI rendering, JAR packaging",
       github: "https://github.com/UNM-CS351/project-5-auctions-project-5-group-02-1",
       demo: "",
-      image: "/screenshots/auctions.png",
     },
   ];

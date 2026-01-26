@@ -19,35 +19,30 @@ export async function POST(req: Request) {
     return `• ${p.title}: ${p.description}${link ? ` [View](${link})` : ''}`;
   }).join('\n');
 
-  const prompt = `<s>[INST]
-You are a helpful assistant on the portfolio of Saurav Dhakal — a full-stack developer and computer science student.
-
-Here are Saurav's projects:
-${projectList}
-
-Use this information to answer the user's question.
-Question: ${userMessages}
-[/INST]>`;
-
   try {
-    const togetherResponse = await fetch('https://api.together.xyz/inference', {
+    const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${process.env.TOGETHER_API_KEY!}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY!}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'mistralai/Mistral-7B-Instruct-v0.1',
-        prompt: prompt,
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: `You are a helpful assistant on the portfolio of Saurav Dhakal — a full-stack developer and computer science student at the University of New Mexico. He has worked on real-world projects using React, PHP, TypeScript, C++, and more.\n\nHere are Saurav's projects:\n${projectList}\n\nUse this information to answer user questions.`,
+          },
+          ...messages,
+        ],
         max_tokens: 300,
-        temperature: 0.7,
+        temperature: 0.4,
       }),
     });
 
-    const data = await togetherResponse.json();
+    const data = await openaiResponse.json();
 
-    const outputText = data?.output?.choices?.[0]?.text?.replace(/<\|im_sep\|>/g, '').trim() ??
-      "Sorry, I couldn't generate a response.";
+    const outputText = data?.choices?.[0]?.message?.content?.trim() ?? "Sorry, I couldn't generate a response.";
 
     return NextResponse.json({ content: outputText });
 
