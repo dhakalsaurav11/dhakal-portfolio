@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CourseCard } from "@/components/CourseCard";
 import { highlightedCourses } from "@/lib/courses";
 
 export default function CoursesPage() {

@@ -9,11 +9,6 @@ type ChatMessage = {
 export async function POST(req: Request) {
   const { messages }: { messages: ChatMessage[] } = await req.json();
 
-  const userMessages = messages
-    .filter((m: ChatMessage) => m.role === 'user')
-    .map((m: ChatMessage) => m.content)
-    .join('\n');
-
   const projectList = allProjects.map((p) => {
     const link = p.website || p.demo;
     return `• ${p.title}: ${p.description}${link ? ` [View](${link})` : ''}`;

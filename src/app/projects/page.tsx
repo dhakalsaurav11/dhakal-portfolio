@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { allProjects } from "@/lib/projects";
-import { ProjectCard } from "@/components/ProjectCard";
 
 const allTags = Array.from(
   new Set(allProjects.flatMap((p) => p.tech))
