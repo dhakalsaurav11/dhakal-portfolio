@@ -20,13 +20,13 @@ export function ProjectCard({
   demo,
 }: ProjectCardProps) {
   return (
-    <Card className="bg-neutral-800 text-white border border-neutral-700 transition-transform hover:scale-[1.02] hover:shadow-xl">
+    <Card className="bg-white text-slate-800 border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
       <CardContent className="p-6 space-y-4">
-        <h2 className="text-2xl font-semibold">{title}</h2>
-        <p className="text-neutral-300">{description}</p>
-        <div className="text-sm text-neutral-400">
-          <span className="font-medium text-white">Tech:</span> {tech.join(", ")}<br />
-          <span className="font-medium text-white">Role:</span> {role}
+        <h2 className="text-2xl font-semibold text-slate-900">{title}</h2>
+        <p className="text-slate-600">{description}</p>
+        <div className="text-sm text-slate-600">
+          <span className="font-medium text-slate-900">Tech:</span> {tech.join(", ")}<br />
+          <span className="font-medium text-slate-900">Role:</span> {role}
         </div>
 
         <div className="flex gap-3 pt-2 flex-wrap">
@@ -35,7 +35,7 @@ export function ProjectCard({
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm px-3 py-1 border border-neutral-600 rounded hover:bg-neutral-700"
+              className="text-sm px-3 py-1 border border-slate-300 rounded bg-white text-slate-700 hover:bg-slate-100 transition"
             >
               GitHub
             </a>
@@ -45,7 +45,7 @@ export function ProjectCard({
               href={website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm px-3 py-1 border border-neutral-600 rounded hover:bg-neutral-700"
+              className="text-sm px-3 py-1 border border-slate-300 rounded bg-white text-slate-700 hover:bg-slate-100 transition"
             >
               Website
             </a>
@@ -55,7 +55,7 @@ export function ProjectCard({
               href={demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm px-3 py-1 border border-neutral-600 rounded hover:bg-neutral-700"
+              className="text-sm px-3 py-1 border border-slate-300 rounded bg-white text-slate-700 hover:bg-slate-100 transition"
             >
               Live Demo
             </a>
