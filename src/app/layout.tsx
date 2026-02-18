@@ -1,28 +1,31 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans"; // The "Consultant" font
+import { GeistMono } from "geist/font/mono"; // The "Engineer" font
 import { Navbar } from "@/components/Navbar";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { PortfolioChat } from "@/components/PortfolioChat";
-
-const inter = Inter({ subsets: ["latin"] });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Saurav Dhakal | Portfolio",
-  description: "Developer portfolio of Saurav Dhakal",
+  title: "Dhakal Consulting",
+  description: "High-performance digital infrastructure for growth-focused businesses.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} ${mono.variable} bg-neutral-900 text-white scroll-smooth`}>
-        <ThemeProvider>
-          <Navbar />
-          <main className="max-w-5xl mx-auto px-6 py-12">{children}</main>
+    <html lang="en" className="scroll-smooth">
+      <body 
+        // GeistSans.variable and GeistMono.variable allow you to use them in Tailwind config if needed,
+        // but .className applies them globally right here.
+        className={`${GeistSans.className} ${GeistMono.variable} bg-slate-50 text-slate-900 antialiased selection:bg-blue-100 selection:text-blue-900`}
+      >
+        <Navbar />
+        
+        {/* Full width container to allow background sections to span edge-to-edge */}
+        <main className="min-h-screen w-full pt-16">
+          {children}
+        </main>
 
-          <PortfolioChat /> 
-        </ThemeProvider>
+        <Footer />
       </body>
     </html>
   );
