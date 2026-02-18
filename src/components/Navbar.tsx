@@ -29,8 +29,8 @@ export function Navbar() {
 
           {/* The Text */}
           <div className="flex items-center gap-2 text-sm font-bold text-slate-900 tracking-tight">
-            <span>Saurav Dhakal</span>
-            <span className="hidden sm:inline-block text-slate-400 font-normal">/ Systems Engineer</span>
+            <span>Dhakal</span>
+            <span className="hidden sm:inline-block text-slate-400 font-normal"> Consulting</span>
           </div>
         </Link>
 
