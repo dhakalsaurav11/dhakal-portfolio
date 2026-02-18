@@ -2,58 +2,62 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
-
-  const links = [
-    { href: "/projects", label: "Projects" },
-    { href: "/courses", label: "Courses" },
-    { href: "/resume", label: "Resume" },
-    { href: "/contact", label: "Contact" }
+  const navLinks = [
+    { href: "/projects", label: "Case Studies" },
   ];
 
   return (
     <motion.header
-      initial={{ y: -20, opacity: 0 }}
+      initial={{ y: -10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 bg-neutral-900/80 backdrop-blur border-b border-neutral-800"
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 supports-[backdrop-filter]:bg-white/60"
     >
-      <nav className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-white hover:text-blue-400">
-          dhakal
-        </Link>
-        <div className="flex items-center space-x-4 text-sm">
-          {links.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`hover:text-white transition ${
-                pathname === href ? "text-blue-400 font-medium" : "text-neutral-300"
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
+      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        {/* LOGO AREA */}
+        <Link href="/" className="group flex items-center gap-3">
+          {/* The Logo Icon */}
+          <div className="p-1.5 bg-slate-900 rounded-lg group-hover:bg-blue-600 transition-colors duration-300">
+            <img src="/icon.svg" alt="SD Logo" className="w-5 h-5 text-white invert" />
+          </div>
 
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="ml-2 p-1 rounded hover:bg-neutral-800"
-              aria-label="Toggle Theme"
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-          )}
+          {/* The Text */}
+          <div className="flex items-center gap-2 text-sm font-bold text-slate-900 tracking-tight">
+            <span>Saurav Dhakal</span>
+            <span className="hidden sm:inline-block text-slate-400 font-normal">/ Systems Engineer</span>
+          </div>
+        </Link>
+
+        {/* Navigation Actions */}
+        <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  pathname === href
+                    ? "text-slate-900"
+                    : "text-slate-500 hover:text-blue-600"
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+
+          <Link
+            href="/contact"
+            className="text-sm font-semibold bg-slate-900 text-white px-5 py-2.5 rounded-full hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform active:scale-95"
+          >
+            Book Strategy Call
+          </Link>
         </div>
       </nav>
     </motion.header>
