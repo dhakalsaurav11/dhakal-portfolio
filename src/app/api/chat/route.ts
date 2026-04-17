@@ -9,10 +9,30 @@ type ChatMessage = {
 export async function POST(req: Request) {
   const { messages }: { messages: ChatMessage[] } = await req.json();
 
+  // Only the last 10 turns kept to cap token usage per request
+  const recentMessages = messages.slice(-10);
+
   const projectList = allProjects.map((p) => {
     const link = p.website || p.demo;
-    return `• ${p.title}: ${p.description}${link ? ` [View](${link})` : ''}`;
+    const outcome = 'outcome' in p && p.outcome ? ` Outcome: ${p.outcome}.` : '';
+    return `• ${p.title} (${p.category}): ${p.description}${outcome}${link ? ` [${link}]` : ''}`;
   }).join('\n');
+
+  const systemPrompt = `You are Diana, the AI assistant on Saurav Dhakal's consulting portfolio (Dhakal Consulting). Saurav is a Systems Engineer who builds high-performance digital infrastructure — websites, e-commerce, and custom systems — for growth-focused businesses.
+
+Your job:
+- Answer visitor questions about Saurav's work and expertise.
+- Help visitors assess whether Saurav is a fit for their project.
+- Point them to /contact when they're ready to talk.
+
+Tone: professional, concise, confident. No emojis. Don't oversell.
+
+If asked something outside the scope of Saurav's work or portfolio, politely redirect the conversation back to his services.
+
+Saurav's projects:
+${projectList}
+
+If you don't know something, say so and suggest booking a strategy call at /contact.`;
 
   try {
     const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -22,29 +42,30 @@ export async function POST(req: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4.1-nano',
         messages: [
-          {
-            role: 'system',
-            content: `You are a helpful assistant on the portfolio of Saurav Dhakal — a full-stack developer and computer science student at the University of New Mexico. He has worked on real-world projects using React, PHP, TypeScript, C++, and more.\n\nHere are Saurav's projects:\n${projectList}\n\nUse this information to answer user questions.`,
-          },
-          ...messages,
+          { role: 'system', content: systemPrompt },
+          ...recentMessages,
         ],
-        max_tokens: 300,
+        max_tokens: 400,
         temperature: 0.4,
       }),
     });
 
-    const data = await openaiResponse.json();
+    if (!openaiResponse.ok) {
+      throw new Error(`OpenAI API returned ${openaiResponse.status}`);
+    }
 
-    const outputText = data?.choices?.[0]?.message?.content?.trim() ?? "Sorry, I couldn't generate a response.";
+    const data = await openaiResponse.json();
+    const outputText = data?.choices?.[0]?.message?.content?.trim() 
+      ?? "Sorry, I couldn't generate a response.";
 
     return NextResponse.json({ content: outputText });
 
   } catch (err: unknown) {
-    console.error("❌ Together.ai error:", err);
+    console.error('OpenAI API error:', err);
     return NextResponse.json({
-      content: `Internal error: ${err instanceof Error ? err.message : 'Something went wrong.'}`,
+      content: `Sorry, I'm having trouble responding right now. Please try again or reach out via the contact page.`,
     });
   }
 }
