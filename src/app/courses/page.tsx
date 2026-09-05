@@ -19,66 +19,90 @@ export default function CoursesPage() {
     : highlightedCourses;
 
   return (
-    <div className="py-12 space-y-6">
-      <div className="space-y-3">
-        <h1 className="text-3xl font-bold">Courses</h1>
-        <p className="text-neutral-400">
-          From reinforcement learning studios to operating systems, architecture, and database design, this coursework spans the stack and fuels how I approach real-world projects.
-        </p>
-      </div>
+    <div className="min-h-screen bg-[#FBFBFA] py-24 px-6">
+      <div className="max-w-5xl mx-auto space-y-10">
+        <div className="space-y-4 border-b border-[#EAEAEA] pb-10">
+          <h1 className="font-serif text-4xl md:text-5xl text-[#111111] tracking-[-0.03em]">
+            Coursework
+          </h1>
+          <p className="text-[#787774] text-lg max-w-xl leading-relaxed">
+            From reinforcement learning to operating systems, architecture, and
+            database design &mdash; coursework that spans the stack and informs
+            how I approach real projects.
+          </p>
+        </div>
 
-      <div className="space-y-3">
-        <p className="text-neutral-400 text-sm uppercase tracking-wide">
-          Filter by topic:
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <button
-            onClick={() => setFilter(null)}
-            className={`px-3 py-1 rounded-full text-sm border ${
-              filter === null
-                ? "bg-accent text-white"
-                : "border-neutral-600 text-neutral-300 hover:text-white"
-            }`}
-          >
-            All
-          </button>
-          {topics.map((topic) => (
+        {/* Filter controls */}
+        <div className="space-y-3">
+          <p className="text-xs font-medium text-[#787774] uppercase tracking-[0.06em]">
+            Filter by topic
+          </p>
+          <div className="flex flex-wrap gap-2">
             <button
-              key={topic}
-              onClick={() => setFilter(topic)}
-              className={`px-3 py-1 rounded-full text-sm border ${
-                filter === topic
-                  ? "bg-accent text-white"
-                  : "border-neutral-600 text-neutral-300 hover:text-white"
+              onClick={() => setFilter(null)}
+              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200 ${
+                filter === null
+                  ? "bg-[#111111] text-white"
+                  : "bg-[#F7F6F3] text-[#787774] border border-[#EAEAEA] hover:text-[#2F3437]"
               }`}
             >
-              {topic}
+              All
             </button>
-          ))}
+            {topics.map((topic) => (
+              <button
+                key={topic}
+                onClick={() => setFilter(topic)}
+                className={`px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  filter === topic
+                    ? "bg-[#111111] text-white"
+                    : "bg-[#F7F6F3] text-[#787774] border border-[#EAEAEA] hover:text-[#2F3437]"
+                }`}
+              >
+                {topic}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div>
-        <div className="mt-8 grid grid-cols-10 text-sm text-neutral-400 font-medium border-b border-neutral-700 pb-2">
-          <div className="col-span-2">Code</div>
-          <div className="col-span-4">Title</div>
-          <div className="col-span-4">Topics</div>
-        </div>
-        <div className="divide-y divide-neutral-800">
-          {filteredCourses.map((course) => (
-            <div key={course.code} className="grid grid-cols-10 gap-4 text-sm text-neutral-300 py-4">
-              <div className="col-span-2 font-semibold text-white">{course.code}</div>
-              <div className="col-span-4">{course.title}</div>
-              <div className="col-span-4 flex flex-wrap gap-2">
-                {course.topics.map((topic, i) => (
-                  <span key={i} className="bg-neutral-800 text-neutral-300 text-xs px-2 py-0.5 rounded">
-                    {topic}
-                  </span>
-                ))}
+        {/* Table header */}
+        <div>
+          <div className="grid grid-cols-10 text-[10px] font-medium text-[#787774] uppercase tracking-[0.06em] border-b border-[#EAEAEA] pb-3">
+            <div className="col-span-2">Code</div>
+            <div className="col-span-4">Title</div>
+            <div className="col-span-4">Topics</div>
+          </div>
+
+          {/* Table rows */}
+          <div className="divide-y divide-[#EAEAEA]">
+            {filteredCourses.map((course) => (
+              <div
+                key={course.code}
+                className="grid grid-cols-10 gap-4 text-sm py-4 items-start"
+              >
+                <div className="col-span-2 font-mono text-[#111111] font-medium text-xs">
+                  {course.code}
+                </div>
+                <div className="col-span-4 text-[#2F3437]">
+                  {course.title}
+                </div>
+                <div className="col-span-4 flex flex-wrap gap-1.5">
+                  {course.topics.map((topic, i) => (
+                    <span
+                      key={i}
+                      className="bg-[#F7F6F3] text-[#787774] text-[10px] px-2 py-0.5 rounded-md font-medium uppercase tracking-[0.04em]"
+                    >
+                      {topic}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
+        <p className="text-xs text-[#787774] pt-4">
+          {filteredCourses.length} course{filteredCourses.length !== 1 ? "s" : ""} &middot; University of New Mexico
+        </p>
       </div>
     </div>
   );

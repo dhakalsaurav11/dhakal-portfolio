@@ -8,7 +8,8 @@ export function Navbar() {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: "/projects", label: "Case Studies" },
+    { href: "/projects", label: "Work" },
+    { href: "/courses", label: "Education" },
   ];
 
   return (
@@ -16,35 +17,35 @@ export function Navbar() {
       initial={{ y: -10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 supports-[backdrop-filter]:bg-white/60"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#FBFBFA]/90 backdrop-blur-sm border-b border-[#E0E0E0]"
     >
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        
-        {/* LOGO AREA */}
-        <Link href="/" className="group flex items-center gap-3">
-          {/* The Logo Icon */}
-          <div className="p-1.5 bg-slate-900 rounded-lg group-hover:bg-blue-600 transition-colors duration-300">
-            <img src="/icon.svg" alt="SD Logo" className="w-5 h-5 text-white invert" />
+      <nav
+        className="max-w-5xl mx-auto px-8 h-16 flex items-center justify-between"
+        aria-label="Primary navigation"
+      >
+        <Link
+          href="/"
+          className="flex items-center gap-3 group"
+        >
+          <div className="w-8 h-8 bg-[#111111] flex items-center justify-center transition-colors duration-200 group-hover:bg-[#333333]">
+            <span className="text-white text-xs font-bold font-mono leading-none">SD</span>
           </div>
-
-          {/* The Text */}
-          <div className="flex items-center gap-2 text-sm font-bold text-slate-900 tracking-tight">
-            <span>Dhakal</span>
-            <span className="hidden sm:inline-block text-slate-400 font-normal"> Consulting</span>
-          </div>
+          <span className="text-sm font-semibold text-[#111111] tracking-[-0.02em]">
+            Dhakal
+            <span className="hidden sm:inline text-[#787774] font-normal ml-1.5">Consulting</span>
+          </span>
         </Link>
 
-        {/* Navigation Actions */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className={`text-sm font-medium transition-colors duration-200 ${
+                className={`text-sm tracking-[-0.01em] transition-colors duration-200 ${
                   pathname === href
-                    ? "text-slate-900"
-                    : "text-slate-500 hover:text-blue-600"
+                    ? "text-[#111111] font-semibold"
+                    : "text-[#787774] font-medium hover:text-[#111111]"
                 }`}
               >
                 {label}
@@ -54,9 +55,9 @@ export function Navbar() {
 
           <Link
             href="/contact"
-            className="text-sm font-semibold bg-slate-900 text-white px-5 py-2.5 rounded-full hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform active:scale-95"
+            className="text-sm font-semibold bg-[#111111] text-white px-6 py-2.5 border border-[#111111] hover:bg-transparent hover:text-[#111111] transition-colors duration-200 active:scale-[0.98]"
           >
-            Book Strategy Call
+            Get in Touch
           </Link>
         </div>
       </nav>

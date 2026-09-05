@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Check, ArrowRight, Clock, Building2, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -9,9 +8,8 @@ export default function ContactPage() {
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  
-  // NOTE: Swap this out for a custom domain email as soon as possible
-  const email = "dhakalsaurav11@gmail.com"; 
+
+  const email = "dhakalsaurav11@gmail.com";
   const router = useRouter();
 
   const handleCopy = () => {
@@ -23,214 +21,288 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    
-    // 1. Capture Form Data
     const formData = new FormData(form);
 
-    // 2. Honeypot Check (Silent Spam Prevention)
-    // If a bot filled out the hidden 'company_site' field, stop immediately.
-    if (formData.get("company_site")) return; 
+    if (formData.get("company_site")) return;
 
     setIsSubmitting(true);
 
     try {
-      // 3. Send Data to Formspree (Replace YOUR_FORM_ID below)
       const response = await fetch("https://formspree.io/f/xzdavbjv", {
         method: "POST",
         body: formData,
         headers: {
-          'Accept': 'application/json' // <--- Crucial: This stops Formspree from redirecting the user away
-        }
+          Accept: "application/json",
+        },
       });
 
       if (response.ok) {
-        // 4. Success: Show Animation & Redirect
         setIsSubmitting(false);
         setSubmitted(true);
-        
-        // Wait 1.5s for user to see the green checkmark, then go to Thank You page
         setTimeout(() => {
           router.push("/thank-you");
         }, 1500);
       } else {
-        // 5. Error: (Optional) Show an alert or error state
         setIsSubmitting(false);
         alert("There was a problem sending your message. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setIsSubmitting(false);
-      alert("Error sending message. Please try again later.");
+      alert("Connection failed. Please try again later.");
     }
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-24 px-6">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-16 items-start">
-        
-        {/* --- LEFT COLUMN: Authority & Info --- */}
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="lg:col-span-5 space-y-10 sticky top-24"
+    <div className="min-h-[100dvh] bg-[#FBFBFA] py-24 px-8">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Page header */}
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="border-b border-[#111111] pb-8 mb-0"
         >
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-              Let's build something <br />
-              <span className="text-slate-400">that performs.</span>
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed border-l-2 border-slate-200 pl-4">
-              I partner with businesses to architect, build, and scale high-performance digital platforms. 
-              Fill out the form to request a strategy call.
-            </p>
-          </div>
-
-          <div className="space-y-6 pt-6">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-blue-50 text-blue-600 rounded-lg shrink-0">
-                <Clock className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Availability</h3>
-                <p className="text-slate-600 mt-1">Currently accepting new projects for Q2. Expect a response within 24-48 hours.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg shrink-0">
-                <Mail className="w-6 h-6" />
-              </div>
-              <div className="w-full">
-                <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Direct Contact</h3>
-                <div className="mt-2 flex items-center justify-between p-3 bg-white border border-slate-200 rounded-lg shadow-sm">
-                  <span className="text-sm font-medium text-slate-700">{email}</span>
-                  <button
-                    onClick={handleCopy}
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition flex items-center gap-1.5 px-2 py-1 rounded hover:bg-blue-50"
-                  >
-                    {copied ? <Check size={14} /> : <Copy size={14} />}
-                    {copied ? "COPIED" : "COPY"}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Social Proof / Links */}
-          <div className="pt-8 border-t border-slate-200 flex gap-6">
-            <a href="https://linkedin.com/in/dhakalsaurav11" target="_blank" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
-              LinkedIn ↗
-            </a>
-            <a href="https://github.com/dhakalsaurav11" target="_blank" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
-              GitHub ↗
-            </a>
-          </div>
+          <h1 className="font-sans text-4xl md:text-5xl font-semibold tracking-tighter leading-[1.08] text-[#111111]">
+            Let&apos;s build something
+            <br />
+            <span className="text-[#787774]">that performs.</span>
+          </h1>
         </motion.div>
 
-        {/* --- RIGHT COLUMN: The Intake Form --- */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="lg:col-span-7"
-        >
-          <div className="bg-white p-8 md:p-10 rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50">
-            <h2 className="text-2xl font-bold text-slate-900 mb-8">Project Inquiry</h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Honeypot Field */}
-              <input type="text" name="company_site" className="hidden" tabIndex={-1} autoComplete="off" />
+        {/* Grid body */}
+        <div className="grid lg:grid-cols-12 gap-0">
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Left column */}
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 border-r-0 lg:border-r border-[#E0E0E0] py-10 pr-0 lg:pr-10"
+          >
+            <p className="text-[#787774] text-sm leading-relaxed font-sans mb-10 max-w-sm">
+              I partner with businesses to architect, build, and scale
+              high-performance digital platforms. Fill out the form to
+              request a strategy call.
+            </p>
+
+            {/* Response time */}
+            <div className="border-t border-[#E0E0E0] pt-6 mb-6">
+              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block mb-2">
+                Response time
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-sans text-2xl font-semibold text-[#111111] tracking-tight tabular-nums">
+                  24-48
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774]">
+                  hrs
+                </span>
+              </div>
+            </div>
+
+            {/* Direct email */}
+            <div className="border-t border-[#E0E0E0] pt-6 mb-6">
+              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block mb-2">
+                Direct email
+              </span>
+              <div className="flex items-center justify-between border border-[#E0E0E0] bg-white px-4 py-3">
+                <span className="font-mono text-xs text-[#111111] tracking-[0.02em]">
+                  {email}
+                </span>
+                <button
+                  onClick={handleCopy}
+                  className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#787774] hover:text-[#111111] transition-colors duration-150 px-2 py-1"
+                >
+                  {copied ? "Copied" : "Copy"}
+                </button>
+              </div>
+            </div>
+
+            {/* Social links */}
+            <div className="border-t border-[#E0E0E0] pt-6">
+              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block mb-3">
+                Elsewhere
+              </span>
+              <div className="flex gap-4">
+                <a
+                  href="https://linkedin.com/in/dhakalsaurav11"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs tracking-[0.04em] text-[#111111] border-b border-[#111111] pb-0.5 hover:text-[#787774] hover:border-[#787774] transition-colors duration-150"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://github.com/dhakalsaurav11"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs tracking-[0.04em] text-[#111111] border-b border-[#111111] pb-0.5 hover:text-[#787774] hover:border-[#787774] transition-colors duration-150"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right column: Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-8 py-10 pl-0 lg:pl-10"
+          >
+            <div className="mb-8 border-b border-[#E0E0E0] pb-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774]">
+                Project inquiry
+              </span>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-7">
+              <input
+                type="text"
+                name="company_site"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-900">Full Name</label>
+                  <label
+                    htmlFor="name"
+                    className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block"
+                  >
+                    Full name
+                  </label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     required
-                    placeholder="John Doe"
-                    className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                    placeholder="Your name"
+                    spellCheck={false}
+                    className="w-full px-4 py-3 bg-transparent border border-[#111111] text-[#111111] text-sm tracking-[-0.01em] placeholder:text-[#787774]/50 focus:outline-none focus:border-[#E61919] transition-colors duration-150"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-900">Work Email</label>
+                  <label
+                    htmlFor="email"
+                    className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block"
+                  >
+                    Work email
+                  </label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     required
-                    placeholder="john@company.com"
-                    className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                    placeholder="you@company.com"
+                    spellCheck={false}
+                    autoComplete="email"
+                    className="w-full px-4 py-3 bg-transparent border border-[#111111] text-[#111111] text-sm tracking-[-0.01em] placeholder:text-[#787774]/50 focus:outline-none focus:border-[#E61919] transition-colors duration-150"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-900">Company / Organization</label>
-                <div className="relative">
-                  <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input
-                    type="text"
-                    name="company"
-                    placeholder="What is your business name?"
-                    className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-                  />
-                </div>
+                <label
+                  htmlFor="company"
+                  className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block"
+                >
+                  Company
+                </label>
+                <input
+                  id="company"
+                  type="text"
+                  name="company"
+                  placeholder="Your business name"
+                  autoComplete="organization"
+                  className="w-full px-4 py-3 bg-transparent border border-[#111111] text-[#111111] text-sm tracking-[-0.01em] placeholder:text-[#787774]/50 focus:outline-none focus:border-[#E61919] transition-colors duration-150"
+                />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-900">How can I help you?</label>
-                <select 
-                  name="service" 
+                <label
+                  htmlFor="service"
+                  className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block"
+                >
+                  How can I help?
+                </label>
+                <select
+                  id="service"
+                  name="service"
                   required
                   defaultValue=""
-                  className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all appearance-none"
+                  className="w-full px-4 py-3 bg-transparent border border-[#111111] text-[#111111] text-sm tracking-[-0.01em] focus:outline-none focus:border-[#E61919] transition-colors duration-150 appearance-none cursor-pointer"
                 >
-                  <option value="" disabled selected>Select a primary focus...</option>
-                  <option value="new_build">New Platform Build</option>
-                  <option value="redesign">Website Redesign & Migration</option>
-                  <option value="automation">System Automation & Architecture</option>
-                  <option value="consulting">Technical Consulting / Audit</option>
+                  <option value="" disabled>
+                    Select a focus area
+                  </option>
+                  <option value="new_build">New platform build</option>
+                  <option value="redesign">Website redesign &amp; migration</option>
+                  <option value="automation">System automation</option>
+                  <option value="consulting">Technical consulting</option>
                 </select>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-900">Project Details & Goals</label>
+                <label
+                  htmlFor="message"
+                  className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#787774] block"
+                >
+                  Project details
+                </label>
                 <textarea
+                  id="message"
                   name="message"
                   rows={5}
                   required
-                  placeholder="Tell me about your current bottleneck and what you want to achieve..."
-                  className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none"
-                ></textarea>
+                  placeholder="Describe your current bottleneck and what you want to achieve"
+                  className="w-full px-4 py-3 bg-transparent border border-[#111111] text-[#111111] text-sm tracking-[-0.01em] placeholder:text-[#787774]/50 focus:outline-none focus:border-[#E61919] transition-colors duration-150 resize-none"
+                />
               </div>
 
-              <div className="pt-4">
+              <div className="pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting || submitted}
-                  className="w-full group relative flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-lg font-semibold transition-all disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden"
+                  className="w-full flex items-center justify-center bg-[#111111] text-white px-8 py-3.5 font-mono text-xs uppercase tracking-[0.1em] hover:bg-[#E61919] transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]"
                 >
                   <AnimatePresence mode="wait">
                     {isSubmitting ? (
-                      <motion.span key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        Submitting...
+                      <motion.span
+                        key="loading"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        Sending
                       </motion.span>
                     ) : submitted ? (
-                      <motion.span key="success" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-emerald-400 flex items-center gap-2">
-                        <Check className="w-5 h-5" /> Request Sent
+                      <motion.span
+                        key="success"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                      >
+                        Request sent
                       </motion.span>
                     ) : (
-                      <motion.span key="default" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2">
+                      <motion.span
+                        key="default"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                      >
                         Submit Inquiry
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </motion.span>
                     )}
                   </AnimatePresence>
                 </button>
               </div>
             </form>
-          </div>
-        </motion.div>
+          </motion.div>
+
+        </div>
 
       </div>
     </div>

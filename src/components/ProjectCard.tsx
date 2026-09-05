@@ -20,13 +20,14 @@ export function ProjectCard({
   demo,
 }: ProjectCardProps) {
   return (
-    <Card className="bg-white text-slate-800 border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+    <Card className="bg-white text-[#2F3437] border border-[#EAEAEA] shadow-none hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-shadow duration-200">
       <CardContent className="p-6 space-y-4">
-        <h2 className="text-2xl font-semibold text-slate-900">{title}</h2>
-        <p className="text-slate-600">{description}</p>
-        <div className="text-sm text-slate-600">
-          <span className="font-medium text-slate-900">Tech:</span> {tech.join(", ")}<br />
-          <span className="font-medium text-slate-900">Role:</span> {role}
+        <h2 className="text-xl font-semibold text-[#111111]">{title}</h2>
+        <p className="text-sm text-[#787774] leading-relaxed">{description}</p>
+        <div className="text-sm text-[#787774]">
+          <span className="font-medium text-[#111111]">Tech:</span> {tech.join(", ")}
+          <br />
+          <span className="font-medium text-[#111111]">Role:</span> {role}
         </div>
 
         <div className="flex gap-3 pt-2 flex-wrap">
@@ -35,7 +36,7 @@ export function ProjectCard({
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm px-3 py-1 border border-slate-300 rounded bg-white text-slate-700 hover:bg-slate-100 transition"
+              className="text-sm px-3 py-1 border border-[#EAEAEA] rounded-md bg-white text-[#2F3437] hover:bg-[#F7F6F3] transition-colors duration-200"
             >
               GitHub
             </a>
@@ -45,7 +46,7 @@ export function ProjectCard({
               href={website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm px-3 py-1 border border-slate-300 rounded bg-white text-slate-700 hover:bg-slate-100 transition"
+              className="text-sm px-3 py-1 border border-[#EAEAEA] rounded-md bg-white text-[#2F3437] hover:bg-[#F7F6F3] transition-colors duration-200"
             >
               Website
             </a>
@@ -55,7 +56,7 @@ export function ProjectCard({
               href={demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm px-3 py-1 border border-slate-300 rounded bg-white text-slate-700 hover:bg-slate-100 transition"
+              className="text-sm px-3 py-1 border border-[#EAEAEA] rounded-md bg-white text-[#2F3437] hover:bg-[#F7F6F3] transition-colors duration-200"
             >
               Live Demo
             </a>

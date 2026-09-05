@@ -2,33 +2,26 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Code2, LayoutTemplate, Search, GitFork, Globe } from "lucide-react";
-import { allProjects } from "@/lib/projects"; // Keep your existing import
-
-// --- MOCK DATA FOR PREVIEW (Delete this if using your real import) ---
-// const allProjects = [ ... your data ... ];
+import { allProjects } from "@/lib/projects";
 
 const categories = [
-  { id: "clients", label: "Client Solutions", icon: LayoutTemplate },
-  { id: "engineering", label: "Systems Architecture", icon: Code2 },
+  { id: "clients", label: "Client work" },
+  { id: "engineering", label: "Engineering" },
 ];
 
 export default function WorkPage() {
   const [view, setView] = useState<"clients" | "engineering">("clients");
   const [query, setQuery] = useState("");
 
-  // Filter Logic
   const filtered = useMemo(() => {
     let projects = allProjects;
 
-    // 1. Filter by Category
     if (view === "clients") {
       projects = projects.filter((p) => p.category === "client");
     } else {
       projects = projects.filter((p) => p.category === "engineering");
     }
 
-    // 2. Filter by Search
     const q = query.trim().toLowerCase();
     if (!q) return projects;
 
@@ -39,80 +32,73 @@ export default function WorkPage() {
   }, [view, query]);
 
   return (
-    <div className="min-h-screen bg-slate-50 py-20 px-6">
-      <div className="max-w-6xl mx-auto space-y-16">
-        
-        {/* --- HEADER --- */}
-        <div className="space-y-6 border-b border-slate-200 pb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
-            Selected Work
+    <div className="min-h-screen bg-[#FBFBFA] py-24 px-6">
+      <div className="max-w-5xl mx-auto space-y-12">
+
+        {/* Header */}
+        <div className="space-y-6 border-b border-[#EAEAEA] pb-10">
+          <h1 className="font-serif text-4xl md:text-5xl text-[#111111] tracking-[-0.03em]">
+            Selected work
           </h1>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
-              I bridge the gap between <span className="text-slate-900 font-medium">marketing objectives</span> and <span className="text-slate-900 font-medium">engineering reality</span>. 
-              Below is a collection of commercial platforms and technical systems built for scale.
+            <p className="text-lg text-[#787774] max-w-xl leading-relaxed">
+              A collection of commercial platforms and technical systems
+              built at the intersection of marketing strategy and engineering.
             </p>
-            
-            {/* Search Input */}
-            <div className="relative w-full md:w-64 group">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
-              <input 
-                type="text" 
-                placeholder="Search stack, impact..." 
+
+            <div className="relative w-full md:w-56">
+              <input
+                type="text"
+                placeholder="Search..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full bg-white border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all"
+                aria-label="Search projects"
+                spellCheck={false}
+                className="w-full bg-white border border-[#EAEAEA] rounded-md pl-3 pr-3 py-2 text-sm text-[#2F3437] placeholder:text-[#787774] outline-none focus-visible:ring-2 focus-visible:ring-[#111111]/10 focus-visible:border-[#111111]/20 transition-all duration-200"
               />
             </div>
           </div>
         </div>
 
-        {/* --- CONTROLS --- */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-          {/* iOS Style Segmented Control */}
-          <div className="inline-flex p-1 bg-slate-200/50 rounded-xl border border-slate-200">
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="inline-flex p-0.5 bg-[#F7F6F3] rounded-md border border-[#EAEAEA]">
             {categories.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setView(cat.id as any)}
-                className={`relative px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  view === cat.id 
-                    ? "text-slate-900 shadow-sm" 
-                    : "text-slate-500 hover:text-slate-700"
+                onClick={() => setView(cat.id as "clients" | "engineering")}
+                className={`relative px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  view === cat.id
+                    ? "text-[#111111] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+                    : "text-[#787774] hover:text-[#2F3437]"
                 }`}
               >
-                {view === cat.id && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-white rounded-lg shadow-sm"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10 flex items-center gap-2">
-                  <cat.icon className="w-4 h-4" />
-                  {cat.label}
-                </span>
+                {cat.label}
               </button>
             ))}
           </div>
-          
-          <div className="text-xs font-mono text-slate-400 uppercase tracking-widest">
-            {filtered.length} Projects Found
-          </div>
+
+          <span className="text-xs font-mono text-[#787774] uppercase tracking-[0.06em]">
+            {filtered.length} project{filtered.length !== 1 ? "s" : ""}
+          </span>
         </div>
 
-        {/* --- GRID LAYOUT --- */}
+        {/* Grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={view}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className={view === "clients" ? "grid md:grid-cols-2 gap-8" : "space-y-4"}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className={
+              view === "clients"
+                ? "grid md:grid-cols-2 gap-px bg-[#EAEAEA] rounded-lg overflow-hidden border border-[#EAEAEA]"
+                : "space-y-3"
+            }
           >
             {filtered.length === 0 ? (
-              <div className="col-span-full py-20 text-center text-slate-500">
+              <div className="col-span-full py-20 text-center text-[#787774] text-sm">
                 No projects match your search.
               </div>
             ) : (
@@ -123,30 +109,32 @@ export default function WorkPage() {
           </motion.div>
         </AnimatePresence>
 
-        {/* --- FEATURED TESTIMONIAL (Static & Elegant) --- */}
-        <div className="mt-20 border-t border-slate-200 pt-16">
-          <div className="bg-slate-900 rounded-2xl p-10 md:p-14 text-center md:text-left relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 blur-[100px] opacity-20" />
-            
-            <div className="relative z-10 flex flex-col md:flex-row gap-10 items-center">
-               <div className="md:w-2/3 space-y-6">
-                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-medium border border-blue-500/30">
-                    Trusted Partner
-                 </div>
-                 <h2 className="text-2xl md:text-3xl font-medium text-white leading-relaxed">
-                   "Saurav built a professional platform that clearly communicates our mission. The final product exceeded expectations."
-                 </h2>
-                 <div>
-                   <div className="text-white font-semibold">John J. Berger</div>
-                   <div className="text-slate-400 text-sm">Author & Climate Policy Expert</div>
-                 </div>
-               </div>
-               
-               <div className="md:w-1/3 flex justify-center md:justify-end">
-                 <a href="/contact" className="bg-white text-slate-900 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-xl">
-                   Start Your Project
-                 </a>
-               </div>
+        {/* Testimonial */}
+        <div className="mt-16 border-t border-[#EAEAEA] pt-16">
+          <div className="bg-white rounded-lg border border-[#EAEAEA] p-10 md:p-14">
+            <div className="flex flex-col md:flex-row gap-10 items-start md:items-center">
+              <div className="md:w-2/3 space-y-6">
+                <span className="text-xs font-mono text-[#787774] uppercase tracking-[0.06em]">
+                  Client feedback
+                </span>
+                <blockquote className="font-serif text-xl md:text-2xl text-[#111111] leading-relaxed italic">
+                  &ldquo;Saurav built a professional platform that clearly communicates
+                  our mission. The final product exceeded expectations.&rdquo;
+                </blockquote>
+                <div>
+                  <div className="text-sm font-semibold text-[#111111]">John J. Berger</div>
+                  <div className="text-sm text-[#787774]">Author &amp; Climate Policy Expert</div>
+                </div>
+              </div>
+
+              <div className="md:w-1/3 flex justify-start md:justify-end">
+                <a
+                  href="/contact"
+                  className="inline-flex h-11 items-center justify-center bg-[#111111] text-white text-sm font-semibold px-7 rounded-md hover:bg-[#333333] transition-colors duration-200 active:scale-[0.98]"
+                >
+                  Start a Project
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -156,51 +144,57 @@ export default function WorkPage() {
   );
 }
 
-// --- SUB-COMPONENT: CARD DESIGN ---
-function ProjectCard({ project, view }: { project: any, view: "clients" | "engineering" }) {
-  
-  // VIEW 1: THE "AGENCY" CARD (For Clients)
+function ProjectCard({
+  project,
+  view,
+}: {
+  project: (typeof allProjects)[number];
+  view: "clients" | "engineering";
+}) {
   if (view === "clients") {
     return (
-      <div className="group relative bg-white rounded-2xl p-8 border border-slate-200 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-6">
+      <div className="bg-white p-8 md:p-10 flex flex-col h-full group">
+        <div className="flex justify-between items-start mb-5">
           <div className="space-y-1">
-            <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+            <h3 className="text-lg font-semibold text-[#111111] group-hover:text-[#555555] transition-colors duration-200">
               {project.title}
             </h3>
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-wide">
-              {project.role || "Development & Strategy"}
+            <p className="text-xs font-mono text-[#787774] tracking-[0.04em] uppercase">
+              {project.role?.split(",")[0] || "Development"}
             </p>
           </div>
           {project.website && (
-            <a 
-              href={project.website} 
-              target="_blank" 
-              className="p-2 rounded-full bg-slate-50 text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all"
+            <a
+              href={project.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${project.title} website`}
+              className="text-xs font-medium text-[#787774] border-b border-[#EAEAEA] pb-0.5 hover:text-[#111111] hover:border-[#111111] transition-colors duration-200"
             >
-              <ArrowUpRight className="w-5 h-5" />
+              Visit
             </a>
           )}
         </div>
 
-        {/* Description */}
-        <p className="text-slate-600 leading-relaxed mb-6 flex-grow">
+        <p className="text-sm text-[#787774] leading-relaxed mb-5 flex-grow">
           {project.description}
         </p>
 
-        {/* Outcome Box (Crucial for Consulting) */}
         {project.outcome && (
-          <div className="mb-6 p-4 bg-emerald-50/50 border border-emerald-100 rounded-lg">
-            <p className="text-xs text-emerald-600 font-semibold uppercase mb-1">Impact</p>
-            <p className="text-sm font-medium text-emerald-900">{project.outcome}</p>
+          <div className="mb-5 p-4 bg-[#EDF3EC] rounded-md">
+            <p className="text-xs text-[#346538] font-medium uppercase tracking-[0.04em] mb-1">
+              Impact
+            </p>
+            <p className="text-sm text-[#346538]">{project.outcome}</p>
           </div>
         )}
 
-        {/* Tech Stack (Minimalist) */}
-        <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-100 mt-auto">
+        <div className="flex flex-wrap gap-2 pt-5 border-t border-[#EAEAEA] mt-auto">
           {(project.tech || []).slice(0, 4).map((t: string) => (
-            <span key={t} className="px-2 py-1 rounded bg-slate-100 text-slate-600 text-[10px] font-medium uppercase tracking-wide">
+            <span
+              key={t}
+              className="px-2 py-0.5 rounded-md bg-[#F7F6F3] text-[#787774] text-[10px] font-medium uppercase tracking-[0.04em]"
+            >
               {t}
             </span>
           ))}
@@ -209,42 +203,58 @@ function ProjectCard({ project, view }: { project: any, view: "clients" | "engin
     );
   }
 
-  // VIEW 2: THE "SYSTEMS" ROW (For Engineering)
   return (
-    <div className="group bg-white rounded-lg border border-slate-200 p-5 hover:border-blue-400 transition-colors">
-      <div className="flex flex-col md:flex-row gap-6">
-        
-        {/* Title & Role */}
-        <div className="md:w-1/4 min-w-[200px]">
-          <h3 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+    <div className="bg-white rounded-lg border border-[#EAEAEA] p-5 hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-shadow duration-200">
+      <div className="flex flex-col md:flex-row gap-5">
+        <div className="md:w-1/4 min-w-[180px]">
+          <h3 className="font-semibold text-[#111111]">
             {project.title}
           </h3>
-          <p className="text-xs font-mono text-slate-500 mt-1">
-            {project.role}
+          <p className="text-xs font-mono text-[#787774] mt-1">
+            {project.role?.split(",")[0]}
           </p>
-          <div className="flex gap-3 mt-3">
-             {project.github && <a href={project.github} className="text-slate-400 hover:text-slate-900"><GitFork className="w-4 h-4"/></a>}
-             {project.website && <a href={project.website} className="text-slate-400 hover:text-slate-900"><Globe className="w-4 h-4"/></a>}
+          <div className="flex gap-3 mt-3 text-sm">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#787774] hover:text-[#111111] transition-colors duration-200"
+              >
+                Source
+              </a>
+            )}
+            {project.website && (
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#787774] hover:text-[#111111] transition-colors duration-200"
+              >
+                Live
+              </a>
+            )}
           </div>
         </div>
 
-        {/* Details */}
         <div className="md:w-3/4 space-y-3">
-          <p className="text-sm text-slate-600 leading-relaxed">
+          <p className="text-sm text-[#787774] leading-relaxed">
             {project.description}
           </p>
-          
-          {/* Tech Spec Bar */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="text-xs font-mono text-slate-400">STACK:</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="text-[10px] font-mono text-[#787774] uppercase tracking-[0.06em]">
+              Stack
+            </span>
             {(project.tech || []).map((t: string) => (
-              <span key={t} className="text-xs font-mono text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">
+              <span
+                key={t}
+                className="text-xs font-mono text-[#2F3437] bg-[#F7F6F3] px-1.5 py-0.5 rounded-md"
+              >
                 {t}
               </span>
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );

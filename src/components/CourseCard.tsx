@@ -38,19 +38,19 @@ export function CourseCard({
   }, [description, expanded]);
 
   return (
-    <Card className="bg-neutral-800 text-white border border-neutral-700 transition-transform hover:scale-[1.01] hover:shadow-lg">
+    <Card className="bg-white text-[#2F3437] border border-[#EAEAEA] shadow-none hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-shadow duration-200">
       <CardContent className="p-6 space-y-4">
         <div className="space-y-1">
-          <h2 className="text-2xl font-semibold">{title}</h2>
-          <p className="text-sm text-neutral-400">
-            {code} • {institution} • {term}
+          <h2 className="text-lg font-semibold text-[#111111]">{title}</h2>
+          <p className="text-xs font-mono text-[#787774]">
+            {code} &middot; {institution} &middot; {term}
           </p>
         </div>
         <div className="space-y-2">
           <p
             ref={descriptionRef}
             className={cn(
-              "text-neutral-300",
+              "text-sm text-[#787774] leading-relaxed",
               !expanded && isOverflowing && "clamp-3-lines"
             )}
           >
@@ -59,17 +59,17 @@ export function CourseCard({
           {isOverflowing && (
             <button
               onClick={() => setExpanded((prev) => !prev)}
-              className="text-sm text-blue-400 hover:text-blue-300"
+              className="text-sm text-[#111111] hover:text-[#555555] transition-colors duration-200"
             >
-              {expanded ? "Show Less" : "More"}
+              {expanded ? "Show less" : "Read more"}
             </button>
           )}
         </div>
-        <div className="flex flex-wrap gap-2 text-xs uppercase tracking-wide text-neutral-300">
+        <div className="flex flex-wrap gap-1.5">
           {topics.map((topic) => (
             <span
               key={topic}
-              className="rounded-full bg-neutral-900 border border-neutral-700 px-3 py-1"
+              className="bg-[#F7F6F3] text-[#787774] text-[10px] px-2 py-0.5 rounded-md font-medium uppercase tracking-[0.04em]"
             >
               {topic}
             </span>
@@ -80,7 +80,7 @@ export function CourseCard({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex text-sm text-blue-400 hover:text-blue-300"
+            className="inline-flex text-sm text-[#111111] border-b border-[#EAEAEA] pb-0.5 hover:border-[#111111] transition-colors duration-200"
           >
             View syllabus
           </a>
